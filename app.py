@@ -1,7 +1,5 @@
 import tkinter as tk
-from tkinter import ANCHOR, CENTER, Button, ttk
-import time
-from types import CellType
+from tkinter import ttk
 import password_play as pp
 
 ## Присвоение root - Tk + навзание + размер окна приложения + запрет на изменение окна
@@ -20,7 +18,7 @@ def change(new_value):
 
 
 ## Отображение выбраного размера пароля
-pass_size = ttk.Label()
+pass_size = ttk.Label(text=size)
 pass_size.pack(anchor="nw")
 pass_size.place(x=270, y=100, width=19, height=20)
 
@@ -45,7 +43,10 @@ info_pass_size = tk.Label(text="Выберите длину пароля")
 info_pass_size.place(x=100, y=80, width=210, height=20)
 
 ## Ползунок выбора размера пароля
-scale = ttk.Scale(orient="horizontal", length=200, from_=8, to=50, command=change)
+scale_var = tk.IntVar(value=8)
+scale = ttk.Scale(
+    orient="horizontal", length=200, from_=8, to=50, variable=scale_var, command=change
+)
 scale.pack(anchor="nw")
 scale.place(x=120, y=100, width=150, height=20)
 
@@ -58,7 +59,7 @@ ready_password.configure(background="white")
 
 ## Вывод пароля
 def gen_pass():
-    size = int(scale.get())
+    size = int(scale_var.get())
     ready_password["text"] = pp.generate_password(size)
 
 
