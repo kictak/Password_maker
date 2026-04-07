@@ -28,7 +28,6 @@ def check_password_leak(password):
     # 3. Делаем запрос к API
     url = f"https://api.pwnedpasswords.com/range/{prefix}"
     response = requests.get(url)
-    print(response)
     if response.status_code != 200:
         return "Ошибка при запросе к API"
     # 4. Ищем наш суффикс в ответе (ответ — список строк вида "СУФФИКС:КОЛИЧЕСТВО")

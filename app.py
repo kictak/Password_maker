@@ -17,7 +17,6 @@ good_password = "Тут чего-то не хватает...??"
 def change(new_value):
     size = int(float(new_value))
     pass_size["text"] = size
-    print(size)
 
 
 ## Отображение выбраного размера пароля
@@ -61,7 +60,6 @@ ready_password.configure(background="white")
 def gen_pass():
     size = int(scale.get())
     ready_password["text"] = pp.generate_password(size)
-    print(good_password)
 
 
 ## Иконка приложения
@@ -73,4 +71,19 @@ open_button = ttk.Button(text="Сгенерировать пароль", command
 open_button.place(x=120, y=130, width=155, height=35)
 
 
-root.mainloop()
+## Конопка и функция копирования готового пароля
+def copy():
+    if ready_password["text"] != good_password:
+        root.clipboard_clear()
+        root.clipboard_append(ready_password["text"])
+    else:
+        ready_password["text"] = "Тут ещё нечего копировать!!!"
+
+
+copy_button = ttk.Button(text="Скопировать", command=copy)
+
+copy_button.place(x=150, y=45, width=95, height=35)
+
+
+def run_app():
+    root.mainloop()
